@@ -1,10 +1,42 @@
-import styled from "styled-components";
-
+import { FC } from "react";
 import { Fragment } from "react/jsx-runtime";
+
+import styled from "styled-components";
 
 import Button from "../../shared/ui/button";
 
-import joker from "../../../public/images/joker.png";
+import { Products } from "../../api/types/productTypes";
+
+type IProps = {
+  product: Products;
+};
+
+const Card: FC<IProps> = ({ product }) => {
+  return (
+    <Fragment>
+      <CardItem>
+        <img src={product.image} alt="spider man image" loading="lazy" />
+        <CardContent>
+          <CardName>{product.name}</CardName>
+          <CardSize>Размеры: 48-52</CardSize>
+          <CardPrice>{product.price}₽/день.</CardPrice>
+          <Button size="sm" type="button">
+            Быстрый просмотр
+          </Button>
+          <CardStock
+            style={{ color: product.count === 0 ? "red" : "#041a3f99" }}
+          >
+            {product.count === 0
+              ? "Нет в наличии"
+              : `В наличии: ${product.count}`}
+          </CardStock>
+        </CardContent>
+      </CardItem>
+    </Fragment>
+  );
+};
+
+export default Card;
 
 const CardItem = styled.li`
   width: 100%;
@@ -62,24 +94,3 @@ const CardStock = styled.p`
   color: #041a3f99;
   margin-top: 16px;
 `;
-
-const Card = () => {
-  return (
-    <Fragment>
-      <CardItem>
-        <img src={joker} alt="spider man image" loading="lazy" />
-        <CardContent>
-          <CardName>Человек-паук</CardName>
-          <CardSize>Размеры: 48-52</CardSize>
-          <CardPrice>{1000}₽/день.</CardPrice>
-          <Button size="sm" type="button">
-            Быстрый просмотр
-          </Button>
-          <CardStock>В наличии: {1}</CardStock>
-        </CardContent>
-      </CardItem>
-    </Fragment>
-  );
-};
-
-export default Card;
