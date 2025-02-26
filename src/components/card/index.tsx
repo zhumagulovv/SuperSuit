@@ -15,7 +15,7 @@ const Card: FC<IProps> = ({ product }) => {
   return (
     <Fragment>
       <CardItem>
-        <img src={product.image} alt="spider man image" loading="lazy" />
+        <CardImage src={product.image} alt="spider man image" loading="lazy" />
         <CardContent>
           <CardName>{product.name}</CardName>
           <CardSize>Размеры: 48-52</CardSize>
@@ -46,6 +46,26 @@ const CardItem = styled.li`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+`;
+
+const CardImage = styled.img`
+  width: 286px;
+  height: 320px;
+
+  @media screen and (min-width: 768px) and (max-width: 960px) {
+    width: 160px;
+    height: 180px;
+  }
+
+  @media screen and (min-width: 640px) and (max-width: 768px) {
+    width: 250px;
+    height: 280px;
+  }
+
+  @media only screen and (max-width: 640px) {
+    width: 160px;
+    height: 180px;
+  }
 `;
 
 const CardContent = styled.div`

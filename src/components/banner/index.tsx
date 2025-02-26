@@ -15,7 +15,7 @@ const Banner = () => {
               <BannerTitleStrong>Аренда костюмов</BannerTitleStrong> высшего
               качества по доступной цене
             </BannerTitle>
-            <Button size="md" type="button">
+            <Button size="md" type="button" blockCenter="center">
               Подобрать костюм
             </Button>
           </BannerContentTitle>
@@ -51,6 +51,7 @@ const BannerContent = styled.div`
 
   @media only screen and (max-width: 768px) {
     flex-direction: column-reverse;
+    justify-content: center;
   }
 `;
 
@@ -93,12 +94,14 @@ const BannerTitle = styled.h2`
     font-size: 42px;
     line-height: 58.8px;
     margin-bottom: 32px;
+    text-align: center;
   }
 
   @media screen and (min-width: 320px) and (max-width: 640px) {
     font-size: 32px;
     line-height: 44.8px;
     margin-bottom: 32px;
+    text-align: center;
   }
 
   @media only screen and (max-width: 320px) {

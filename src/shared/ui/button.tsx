@@ -5,12 +5,16 @@ type Props = {
   children: React.ReactNode;
   size: "sm" | "md" | "lg";
   type: "reset" | "submit" | "button";
-  onclick?:
+  blockCenter?: "center" | "none";
+  onClick?:
     | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;
 };
 
 const ButtonContainer = styled.button<Props>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: ${(props) =>
     props.size === "sm"
       ? "254px"
@@ -30,11 +34,20 @@ const ButtonContainer = styled.button<Props>`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+
+  @media only screen and (max-width: 768px) {
+    margin: ${(props) => (props.blockCenter === "center" ? "0 auto" : "0")};
+  }
 `;
 
-const Button: FC<Props> = ({ children, type, size, onclick }) => {
+const Button: FC<Props> = ({ children, type, size, blockCenter, onClick }) => {
   return (
-    <ButtonContainer size={size} type={type} onClick={onclick}>
+    <ButtonContainer
+      blockCenter={blockCenter}
+      size={size}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </ButtonContainer>
   );
