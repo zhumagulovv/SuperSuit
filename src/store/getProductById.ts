@@ -1,24 +1,21 @@
 import { create } from "zustand";
-
 import { apiRoot } from "../api/config/api";
+import { getProduct } from "../interface";
 
-import { getProducts } from "../interface";
-
-
-const initialState: Omit<getProducts, "execute"> = {
+const initialState: Omit<getProduct, "execute"> = {
   loading: "idle",
   success: false,
   error: null,
-  data: [],
+  data: null,
 };
 
-export const useGetProducts = create<getProducts>((set) => ({
+export const useGetProductById = create<getProduct>((set) => ({
   ...initialState,
-  execute: async () => {
+  execute: async (id: string) => {
     set({ ...initialState, loading: "loading" });
 
     try {
-      const res = await apiRoot.get("/products");
+      const res = await apiRoot.get(`/products/${id}`);
 
       set({ loading: "success", success: true, error: null, data: res.data });
     } catch (error) {
@@ -30,7 +27,7 @@ export const useGetProducts = create<getProducts>((set) => ({
         loading: "failed",
         success: false,
         error: errorMessage,
-        data: [],
+        data: null,
       });
     }
   },

@@ -1,51 +1,82 @@
-import { FC } from "react";
-
-import { Link } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import joker from "../../../public/images/joker.png";
+
+import { Container } from "../../shared/ui/container";
 import Button from "../../shared/ui/button";
+import { useGetProductById } from "../../store/getProductById";
 
 const ViewProduct: FC = () => {
+  const { id } = useParams();
+  const { data, execute } = useGetProductById();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (id) {
+        execute(id);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [id]);
+
   return (
-    <ViewProductContainer>
-      <ViewProductRouter>
-        <HomeRouter to="/">Главная / </HomeRouter>
-        <ProductRouter to="/:view-product">Дарт Вейдер</ProductRouter>
-      </ViewProductRouter>
-      <ViewProductContent>
-        <ProductImage>
-          <img src={joker} alt="product image" />
-        </ProductImage>
-        <ProductContent>
-          <ProductTitle>Дарт Вейдер</ProductTitle>
-          <ProductTel href="tel: +996774814583" target="_blank">
-            0774814583
-          </ProductTel>
-          <ProductPrice>{1500}₽/сутки.</ProductPrice>
-          <ProductContentEquipment>
-            <EquipmentTitle>Комплектация:</EquipmentTitle>
-            <EquipmentType>
-              <EquipmentTypeText>Комбенизон</EquipmentTypeText>
-              <EquipmentTypeText>шлем</EquipmentTypeText>
-              <EquipmentTypeText>плащ</EquipmentTypeText>
-              <EquipmentTypeText>жилет</EquipmentTypeText>
-            </EquipmentType>
-          </ProductContentEquipment>
-          <ProductContentPrice>
-            <PriceTitle>Размер:</PriceTitle>
-            <PriceTitleSizes>
-              <Size>48</Size>
-              <Size>50</Size>
-              <Size>52</Size>
-            </PriceTitleSizes>
-          </ProductContentPrice>
-          <Button size="sm" type="button">
-            Оставить заявку
-          </Button>
-        </ProductContent>
-      </ViewProductContent>
-    </ViewProductContainer>
+    <Container>
+      <ViewProductContainer>
+        <ViewProductRouter>
+          <HomeRouter to="/">Главная / </HomeRouter>
+          <ProductRouter to={`/:${id}`}>{data?.name}</ProductRouter>
+        </ViewProductRouter>
+        <ViewProductContent>
+          <ProductImage>
+            <img src={data?.image} alt="product image" />
+          </ProductImage>
+          <ProductContent>
+            <ProductTitle>{data?.name}</ProductTitle>
+            <ProductTel href="tel: +996774814583" target="_blank">
+              0774814583
+            </ProductTel>
+            <ProductPrice>{data?.price}₽/сутки.</ProductPrice>
+            <ProductContentEquipment>
+              <EquipmentTitle>Комплектация:</EquipmentTitle>
+              <EquipmentType>
+                {Array.isArray(data?.equipment) && data.equipment.length > 0 ? (
+                  data.equipment.map((item, index) => (
+                    <EquipmentTypeText key={index}>{item}</EquipmentTypeText>
+                  ))
+                ) : (
+                  <EquipmentTypeText>Нет комплектации</EquipmentTypeText>
+                )}
+              </EquipmentType>
+            </ProductContentEquipment>
+            <ProductContentPrice>
+              <PriceTitle>Размер:</PriceTitle>
+              <PriceTitleSizes>
+                <Size>48</Size>
+                <Size>50</Size>
+                <Size>52</Size>
+              </PriceTitleSizes>
+            </ProductContentPrice>
+            <Button size="sm" type="button">
+              Оставить заявку
+            </Button>
+          </ProductContent>
+        </ViewProductContent>
+        <ViewProductDesc>
+          <DescTitle>Описание</DescTitle>
+          <div>
+            {Array.isArray(data?.description) && data.description.length > 0 ? (
+              data.description.map((item, index) => (
+                <DescText key={index}>{item}</DescText>
+              ))
+            ) : (
+              <DescText>Нет комплектации</DescText>
+            )}
+          </div>
+        </ViewProductDesc>
+      </ViewProductContainer>
+    </Container>
   );
 };
 
@@ -54,7 +85,7 @@ export default ViewProduct;
 const ViewProductContainer = styled.section`
   padding: 34px 0 64px;
   margin-top: 32px;
-  margin-bottom: 86px; 
+  margin-bottom: 86px;
 
   @media only screen and (max-width: 1024px) {
     padding: 0px 10px;
@@ -205,6 +236,7 @@ const EquipmentTitle = styled.h2`
 const EquipmentType = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   column-gap: 10px;
 `;
 
@@ -259,4 +291,30 @@ const Size = styled.span`
     font-size: 16px;
     line-height: 22px;
   }
+`;
+
+const ViewProductDesc = styled.div``;
+
+const DescTitle = styled.h2`
+  font-family: "Montserrat Alternates";
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29.26px;
+  letter-spacing: 0%;
+  color: #041a3f;
+  margin: 48px 0 16px 0;
+
+  @media only screen and (max-width: 640px) {
+    font-size: 18px;
+    line-height: 21px;
+  }
+`;
+
+const DescText = styled.p`
+  font-family: "Montserrat Alternates";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25.6px;
+  letter-spacing: 0%;
+  color: #041a3fcc;
 `;

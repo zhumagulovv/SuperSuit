@@ -6,12 +6,19 @@ import styled from "styled-components";
 import Button from "../../shared/ui/button";
 
 import { Products } from "../../api/types/productTypes";
+import { useNavigate } from "react-router-dom";
 
 type IProps = {
   product: Products;
 };
 
 const Card: FC<IProps> = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (id: number) => {
+    navigate(`/${id}`);
+  };
+
   return (
     <Fragment>
       <CardItem>
@@ -20,7 +27,11 @@ const Card: FC<IProps> = ({ product }) => {
           <CardName>{product.name}</CardName>
           <CardSize>Размеры: 48-52</CardSize>
           <CardPrice>{product.price}₽/день.</CardPrice>
-          <Button size="sm" type="button">
+          <Button
+            size="sm"
+            type="button"
+            onClick={() => handleClick(product.id)}
+          >
             Быстрый просмотр
           </Button>
           <CardStock

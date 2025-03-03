@@ -12,3 +12,11 @@ export interface getProducts {
   data: Products[];
   execute: () => Promise<void>;
 }
+
+export interface getProduct {
+  loading: "idle" | "loading" | "success" | "failed";
+  success: boolean;
+  error: string | null;
+  data: Products | null;
+  execute: (id: string) => Promise<void>;
+}
