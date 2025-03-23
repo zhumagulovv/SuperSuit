@@ -1,24 +1,14 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 import styled from "styled-components";
 
 import { Container } from "../../shared/ui/container";
-import { useGetProducts } from "../../store/getProducts";
 
 import Card from "../card";
+import useGetProducts from "../../hooks/useGetproducts";
 
 const Products: FC = () => {
-  const { data, loading, execute } = useGetProducts();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      execute();
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading === "loading") return <div>Loading...</div>;
+  const { data, loading } = useGetProducts();
 
   if (loading === "failed") return <div>Ошибка загрузки товаров</div>;
 
@@ -26,6 +16,7 @@ const Products: FC = () => {
     <Container>
       <ProductsTitle>Костюмы в наличии</ProductsTitle>
       <CardContainer>
+        {loading === "loading" && <div>Loading...</div>}
         {loading === "success" &&
           data.map((product) => <Card key={product.id} product={product} />)}
       </CardContainer>

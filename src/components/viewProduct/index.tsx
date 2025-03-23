@@ -1,25 +1,13 @@
-import { FC, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { FC } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
 
 import { Container } from "../../shared/ui/container";
 import Button from "../../shared/ui/button";
-import { useGetProductById } from "../../store/getProductById";
+import useGetProductById from "../../hooks/useGetProductById";
 
 const ViewProduct: FC = () => {
-  const { id } = useParams();
-  const { data, execute } = useGetProductById();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (id) {
-        execute(id);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [id]);
+  const { data, id } = useGetProductById();
 
   return (
     <Container>

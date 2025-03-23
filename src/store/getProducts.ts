@@ -12,7 +12,7 @@ const initialState: Omit<getProducts, "execute"> = {
   data: [],
 };
 
-export const useGetProducts = create<getProducts>((set) => ({
+export const useProducts = create<getProducts>((set) => ({
   ...initialState,
   execute: async () => {
     set({ ...initialState, loading: "loading" });

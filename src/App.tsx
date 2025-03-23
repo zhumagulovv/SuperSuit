@@ -1,8 +1,14 @@
 import { withErrorBoundary } from "react-error-boundary";
+
 import MyRoutes from "./routes/routes";
+import { Suspense } from "react";
 
 function App() {
-  return <MyRoutes />;
+  return (
+    <Suspense fallback={"Loading..."}>
+      <MyRoutes />;
+    </Suspense>
+  );
 }
 
 export default withErrorBoundary(App, {

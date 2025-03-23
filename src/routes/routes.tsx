@@ -1,7 +1,11 @@
+import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
-import Home from "../components/home/home";
+
 import Layout from "../shared/layout/layout";
-import ViewProduct from "../components/viewProduct";
+
+const Home = lazy(() => import("../components/home/home"));
+const ViewProduct = lazy(() => import("../components/viewProduct/index"));
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage/index"));
 
 const MyRoutes = () => {
   return useRoutes([
@@ -16,6 +20,10 @@ const MyRoutes = () => {
         {
           path: "/:id",
           element: <ViewProduct />,
+        },
+        {
+          path: "*",
+          element: <NotFoundPage />,
         },
       ],
     },

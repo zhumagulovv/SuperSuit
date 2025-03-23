@@ -9,7 +9,7 @@ const initialState: Omit<getProduct, "execute"> = {
   data: null,
 };
 
-export const useGetProductById = create<getProduct>((set) => ({
+export const useProductById = create<getProduct>((set) => ({
   ...initialState,
   execute: async (id: string) => {
     set({ ...initialState, loading: "loading" });
