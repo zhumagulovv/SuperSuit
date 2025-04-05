@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Container } from "../../shared/ui/container";
 import Button from "../../shared/ui/button";
-import useGetProductById from "../../hooks/useGetProductById";
+import useGetProductById from "../../lib/hooks/useGetProductById";
 
 const ViewProduct: FC = () => {
   const { data, id } = useGetProductById();

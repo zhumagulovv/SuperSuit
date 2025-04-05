@@ -1,4 +1,4 @@
-import { rentDaysInterface } from "../../interface";
+import { rentDaysInterface } from "../../lib/types/types";
 
 export const rentDays: rentDaysInterface[] = [
   {

@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
-import MontserratAlternatesRegular from "./shared/fonts/MontserratAlternates-Regular.ttf";
-import MontserratAlternatesBold from "./shared/fonts/MontserratAlternates-ExtraBold.ttf";
-import MontserratAlternatesExtraBold from "./shared/fonts/MontserratAlternates-ExtraBold.ttf";
+import MontserratAlternatesRegular from "../assets/fonts/MontserratAlternates-Regular.ttf";
+import MontserratAlternatesBold from "../assets/fonts/MontserratAlternates-ExtraBold.ttf";
+import MontserratAlternatesExtraBold from "../assets/fonts/MontserratAlternates-ExtraBold.ttf";
 
 export default createGlobalStyle`
     @font-face { 

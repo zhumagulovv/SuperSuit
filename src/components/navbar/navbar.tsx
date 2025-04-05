@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 import { Container } from "../../shared/ui/container";
 
-import logoImage from "../../../public/icons/logo.svg";
-import styled from "styled-components";
+import logoImage from "../../assets/icons/logo.svg";
 
 const Navbar = () => {
   return (

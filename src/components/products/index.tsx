@@ -3,9 +3,9 @@ import { FC } from "react";
 import styled from "styled-components";
 
 import { Container } from "../../shared/ui/container";
+import useGetProducts from "../../lib/hooks/useGetproducts";
 
 import Card from "../card";
-import useGetProducts from "../../hooks/useGetproducts";
 
 const Products: FC = () => {
   const { data, loading } = useGetProducts();

@@ -1,6 +1,6 @@
 import { withErrorBoundary } from "react-error-boundary";
 
-import MyRoutes from "./routes/routes";
+import MyRoutes from "../routes/routes";
 import { Suspense } from "react";
 
 function App() {

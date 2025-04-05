@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import bannerImage from "../../../public/images/banner.png";
+import bannerImage from "../../assets/images/banner.png";
 
 import Button from "../../shared/ui/button";
 import { Container } from "../../shared/ui/container";
